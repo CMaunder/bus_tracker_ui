@@ -66,6 +66,7 @@ const MapComponent = () => {
         axios.get("http://localhost:8080/api/v1/activity?direction=OUTBOUND&since=2024-03-31T09:20:00&route=X3")
         .then(res => {
             console.log(res.data)
+            
         })
     }
 
