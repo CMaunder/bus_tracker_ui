@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import Map from './Map';
+import React, { FC } from "react";
+import Map from "./Map";
 
 const Home: FC = () => {
-
-    return <div>
-        <Map />
+  return (
+    <div>
+      <Map />
     </div>
-}
+  );
+};
 
 export default Home;
-
