@@ -1,3 +1,8 @@
+# Google maps api key can be managed here
+https://console.cloud.google.com/apis/credentials?hl=en&project=eastern-gearbox-329817
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
