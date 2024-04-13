@@ -6,6 +6,9 @@ import { lastXMinutes } from "./utils";
 
 const API_KEY: string = process.env.REACT_APP_GOOGLE_API_KEY!;
 
+// @ts-ignore
+const { AdvancedMarkerElement } = google.maps.importLibrary("marker");
+
 const Map = () => {
   const render = (status: Status) => <h1>{status}</h1>;
   return (
@@ -57,7 +60,7 @@ const MapComponent = () => {
       setMap(
         new window.google.maps.Map(ref.current, {
           center: { lat: 50.92865, lng: -1.78847 },
-          zoom: 11,
+          zoom: 13,
         })
       );
     }
@@ -78,7 +81,7 @@ const MapComponent = () => {
         .get("http://localhost:8080/api/v1/activity", {
           params: {
             direction: "OUTBOUND",
-            since: lastXMinutes(10),
+            since: lastXMinutes(4),
             route: "X3",
           },
         })
@@ -87,7 +90,7 @@ const MapComponent = () => {
           activities.forEach((activity) => {
             if (markerCluster) {
               markerCluster.addMarker(
-                new window.google.maps.Marker({
+                new AdvancedMarkerElement({
                   position: {
                     lat: parseFloat(activity.latitude),
                     lng: parseFloat(activity.longitude),
@@ -101,6 +104,11 @@ const MapComponent = () => {
 
     if (map && markerCluster) {
       fetchAndPlotBusLocations();
+      const interval = setInterval(() => {
+        fetchAndPlotBusLocations();
+      }, 20 * 1000);
+
+      return () => clearInterval(interval);
     }
   }, [map, markerCluster]);
 
