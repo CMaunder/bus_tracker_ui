@@ -16,7 +16,7 @@ beachFlagImg.src =
 
 const center = { lat: 50.92865, lng: -1.78847 };
 
-const xMins = 3;
+const xMins = 8;
 
 type activityRecord = {
   bearing: number;
@@ -65,11 +65,8 @@ const AdvancedMap = () => {
   };
 
   const calculateOpacity = (recordedAtTime): number => {
-    console.log(recordedAtTime);
-
     const d = new Date(recordedAtTime);
     const diffTime = Math.abs(d.valueOf() - Date.now().valueOf());
-    console.log(diffTime / 1000);
     return (xMins * 60 * 1000 - diffTime) / (xMins * 60 * 1000);
   };
 
@@ -97,7 +94,7 @@ const AdvancedMap = () => {
               top: 0,
               left: 0,
               background: "red",
-              border: "2px solid #0e6443",
+              border: "2px solid black",
               borderRadius: "15%",
               opacity: `${calculateOpacity(busRecord.recordedAtTime) * 100}%`,
               transform: `translate(-50%, -50%) rotate(${
@@ -110,28 +107,6 @@ const AdvancedMap = () => {
         </AdvancedMarker>
       );
     });
-    return (
-      <AdvancedMarker
-        position={center}
-        title={"AdvancedMarker with custom html content."}
-      >
-        <div
-          style={{
-            width: 30,
-            height: 13,
-            position: "absolute",
-            top: 0,
-            left: 0,
-            background: "red",
-            border: "2px solid #0e6443",
-            borderRadius: "15%",
-            transform: "translate(-50%, -50%) rotate(90deg)",
-          }}
-        >
-          {"--->"}
-        </div>
-      </AdvancedMarker>
-    );
   };
 
   return (
